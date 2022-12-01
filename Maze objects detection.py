@@ -21,21 +21,6 @@ def get_nodes(x, y):
 
 def detect_traffic_signals(maze_image):
 
-	"""
-	Purpose:
-	---
-	This function takes the image as an argument and returns a list of
-	nodes in which traffic signals are present in the image
-
-	Input Arguments:
-	---
-	`maze_image` :	[ numpy array ]
-			numpy array of image returned by cv2 library
-	Returns:
-	---
-	`traffic_signals` : [ list ]
-			list containing nodes in which traffic signals are present
-	"""    
 	traffic_signals = []
 	hsv = cv2.cvtColor(maze_image, cv2.COLOR_BGR2HSV)
 
@@ -63,21 +48,6 @@ def detect_traffic_signals(maze_image):
 
 def detect_horizontal_roads_under_construction(maze_image):
 	
-	"""
-	Purpose:
-	---
-	This function takes the image as an argument and returns a list
-	containing the missing horizontal links
-
-	Input Arguments:
-	---
-	`maze_image` :	[ numpy array ]
-			numpy array of image returned by cv2 library
-	Returns:
-	---
-	`horizontal_roads_under_construction` : [ list ]
-			list containing missing horizontal links
-	"""    
 	horizontal_roads_under_construction = []
 	for i in range(7):
 		for j in range(6):
@@ -91,21 +61,6 @@ def detect_horizontal_roads_under_construction(maze_image):
 
 def detect_vertical_roads_under_construction(maze_image):
 
-	"""
-	Purpose:
-	---
-	This function takes the image as an argument and returns a list
-	containing the missing vertical links
-
-	Input Arguments:
-	---
-	`maze_image` :	[ numpy array ]
-			numpy array of image returned by cv2 library
-	Returns:
-	---
-	`vertical_roads_under_construction` : [ list ]
-			list containing missing vertical links
-	"""    
 	vertical_roads_under_construction = []
 
 	for i in range(6):
@@ -121,31 +76,6 @@ def detect_vertical_roads_under_construction(maze_image):
 
 def detect_medicine_packages(maze_image):
 
-	"""
-	Purpose:
-	---
-	This function takes the image as an argument and returns a nested list of
-	details of the medicine packages placed in different shops
-
-	** Please note that the shop packages should be sorted in the ASCENDING order of shop numbers 
-	   as well as in the alphabetical order of colors.
-	   For example, the list should first have the packages of shop_1 listed. 
-	   For the shop_1 packages, the packages should be sorted in the alphabetical order of color ie Green, Orange, Pink and Skyblue.
-
-	Input Arguments:
-	---
-	`maze_image` :	[ numpy array ]
-			numpy array of image returned by cv2 library
-	Returns:
-	---
-	`medicine_packages` : [ list ]
-			nested list containing details of the medicine packages present.
-			Each element of this list will contain 
-			- Shop number as Shop_n
-			- Color of the package as a string
-			- Shape of the package as a string
-			- Centroid co-ordinates of the package
-	"""    
 	medicine_packages = []
 
 	gray = cv2.cvtColor(maze_image, cv2.COLOR_BGR2GRAY)
@@ -191,29 +121,6 @@ def detect_medicine_packages(maze_image):
 
 def detect_arena_parameters(maze_image):
 
-	"""
-	Purpose:
-	---
-	This function takes the image as an argument and returns a dictionary
-	containing the details of the different arena parameters in that image
-
-	The arena parameters are of four categories:
-	i) traffic_signals : list of nodes having a traffic signal
-	ii) horizontal_roads_under_construction : list of missing horizontal links
-	iii) vertical_roads_under_construction : list of missing vertical links
-	iv) medicine_packages : list containing details of medicine packages
-
-	These four categories constitute the four keys of the dictionary
-
-	Input Arguments:
-	---
-	`maze_image` :	[ numpy array ]
-			numpy array of image returned by cv2 library
-	Returns:
-	---
-	`arena_parameters` : { dictionary }
-			dictionary containing details of the arena parameters
-	"""    
 	arena_parameters = {}
 	arena_parameters['traffic_signals'] = detect_traffic_signals(maze_image)
 	arena_parameters['horizontal_roads_under_construction'] = detect_horizontal_roads_under_construction(maze_image)
